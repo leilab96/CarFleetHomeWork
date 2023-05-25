@@ -19,4 +19,11 @@ class PositionModel(BaseModel, MixinModel):
         # Initialize the date and time of the position
         self.date = date
 
-
+    def json(self):
+        return {
+            'id': self.id,
+            'date': self.date.isoformat(),
+            'latitude': self.latitude,
+            'longitude': self.longitude,
+            'car_id': self.car_id        
+        }

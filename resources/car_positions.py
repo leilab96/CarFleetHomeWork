@@ -26,3 +26,15 @@ class CarPosition(Resource):
         car_position.save_to_db()
 
         return {'message': 'Position saved successfully'}, 201
+    
+    # get method to list positions based on plate number
+    def get(self, plate):
+        car = CarModel.find_by_attribute(license_plate=plate)
+         # Return an error message if the car is not found
+        if not car:
+            return {'message': 'Car not found.'}, 404
+
+        positions = PositionModel.query.filter_by(car_id=car.id).all()
+        positions_json = [position.json() for position in positions]
+
+        return {'positions': positions_json}, 200
