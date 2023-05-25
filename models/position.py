@@ -21,9 +21,7 @@ class PositionModel(BaseModel, MixinModel):
 
     def json(self):
         return {
-            'id': self.id,
             'date': self.date.isoformat(),
             'latitude': self.latitude,
-            'longitude': self.longitude,
-            'car_id': self.car_id        
+            'longitude': self.longitude      
         }
