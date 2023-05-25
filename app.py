@@ -9,6 +9,7 @@ from models.driver import DriverModel
 from models.fleet import FleetModel
 from models.car_fleet import CarFleetLink
 from models.user import UserModel
+from models.position import PositionModel
 
 from resources.car import Car, CarList
 from resources.driver import Driver
@@ -18,6 +19,7 @@ from resources.fleet import Fleet, FleetList
 from resources.register import UserRegister
 from resources.auth import Auth
 from resources.user import User
+from resources.car_positions import CarPosition
 from db import db
 
 db_path: str = os.path.join(os.path.dirname(__file__), 'data.db')
@@ -61,7 +63,7 @@ def user_lookup_callback(_jwt_header, jwt_data):
   print(f"identity: {identity}")
   return UserModel.find_by_attribute(id=identity)
 
-
+api.add_resource(CarPosition, '/car/<string:plate>/position')
 api.add_resource(Car, '/car/<string:plate>')
 api.add_resource(CarList, '/cars')
 api.add_resource(Driver, '/driver')
